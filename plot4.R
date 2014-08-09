@@ -37,7 +37,6 @@ png( "plot4.png", width=480, height=480 )
   lines( x=data$DateTime, y=data$Sub_metering_2, col="red" )
   lines( x=data$DateTime, y=data$Sub_metering_3, col="blue" )
   
-# TODO: remove box outline on legend
   legend( "topright", legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), 
         lwd=2, col=c("black", "red", "blue"), bty="n")
 
