@@ -15,9 +15,11 @@ data<- read.csv( data.filename, sep=";",  na.strings="?" )
 # copy colnames from the original data
 colnames( data )<- colnames( data.orig1 )
 
-png( "plot1.png", width=480, height=480 )
-hist( data$Global_active_power, col="red", 
-      main="Global Active Power", 
-      xlab="Global Active Power (kilowatts)" 
-    )
+# merge Date and Time into a single DateTime column
+data$DateTime<- strptime( paste( data$Date, data$Time ),
+                          format="%d/%m/%Y %H:%M:%S" )
+
+png( "plot2.png", width=480, height=480 )
+plot( x=data$DateTime, y=data$Global_active_power,
+      type="l", ylab="Global Active Power (kilowatts)", xlab="" )
 dev.off()
