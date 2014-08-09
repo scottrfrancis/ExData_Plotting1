@@ -1,6 +1,6 @@
-## plot2.R
+## plot3.R
 #
-# reads file and generates plot2.png
+# reads file and generates plot3.png
 
 # subset orig file 
 # $> grep "[1,2]/2/2007" household_power_consumption.txt >household_power_consumption-20070201_20070202.txt
@@ -19,7 +19,14 @@ colnames( data )<- colnames( data.orig1 )
 data$DateTime<- strptime( paste( data$Date, data$Time ),
                           format="%d/%m/%Y %H:%M:%S" )
 
-png( "plot2.png", width=480, height=480 )
-plot( x=data$DateTime, y=data$Global_active_power,
-      type="l", ylab="Global Active Power (kilowatts)", xlab="" )
+png( "plot3.png", width=480, height=480 )
+
+  plot( x=data$DateTime, y=data$Sub_metering_1, type="l",
+        ylab="Energy sub metering", xlab="" )
+  lines( x=data$DateTime, y=data$Sub_metering_2, col="red" )
+  lines( x=data$DateTime, y=data$Sub_metering_3, col="blue" )
+  
+  legend( "topright", legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), 
+        lwd=2, col=c("black", "red", "blue") )
+
 dev.off()
